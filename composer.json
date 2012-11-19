@@ -13,7 +13,7 @@
     "require": {
         "symfony/framework-bundle": "2.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "stof/doctrine-extensions-bundle": "dev-master",
+        "stof/doctrine-extensions-bundle": "dev-master"
 
     },
     "autoload": {
