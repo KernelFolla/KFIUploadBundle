@@ -1,0 +1,25 @@
+parameters:
+  kfi.upload.local_base_path: "%kernel.root_dir%/../web/kfuploads"
+  kfi.upload.web_base_path: "/kfuploads"
+services:
+    kfi.upload.manager:
+        class: KFI\UploadBundle\Services\KFIUploadManager
+        arguments:
+          - local_base_path: '%kfi.upload.local_base_path%'
+            web_base_path: '%kfi.upload.web_base_path%'
+    kfi.upload.listener:
+        class: KFI\UploadBundle\Services\KFIUploadListener
+        arguments: [ '@kfi.upload.manager' ]
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+            - { name: doctrine.event_listener, event: preRemove, method: preRemove }
+    kfi.file_uploader.form.type:
+        class: KFI\UploadBundle\Form\Type\KFIUploadType
+        arguments: [ @doctrine.orm.entity_manager, KFI\UploadBundle\Entity\Upload ]
+        scope: request
+        tags: [ { name: form.type, alias: kfi_upload } ]
+    kfi.upload.twig.extension:
+        arguments: [@kfi.upload.manager]
+        class: KFI\UploadBundle\Services\UploadTwigExtension
+        tags:
+            - { name: twig.extension }

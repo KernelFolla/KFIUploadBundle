@@ -1,0 +1,20 @@
+{
+    "name": "kfi/upload-bundle",
+    "description": "Adds upload field capabilities to entities in Symfony2",
+    "keywords": ["upload"],
+    "type": "symfony-bundle",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Marino Di Clemente",
+            "email": "marino@kfinformatica.it"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*",
+    },
+    "autoload": {
+        "psr-0": { "KFI\\UploadBundle": "" }
+    },
+    "target-dir": "KFI/UploadBundle"
+}

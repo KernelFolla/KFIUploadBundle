@@ -1,0 +1,54 @@
+<script type="text/javascript">
+    $(function () {
+        var JSData = {{ js_data | json_encode | raw }};
+        JSData.libUrl = '{{ asset('dist/uploadify') }}';
+        JSData.uploader = '{{ path('kfi_upload_addfile') }}';
+
+        form_type_kfi_upload(JSData);
+    });
+</script>
+<input id="{{ name }}_uploader" name="{{ name }}_uploader" type="file"/>
+<div id="{{ name }}-queue" class="uploadifyQueue">
+    {% for id, upload in value %}
+        <div id="{{ name }}_uploader_{{ id }}" class="uploadify-queue-item">
+            <a id="kfi_upload-link-{{ id }}" href="{{ upload | kfi_upload('webpath') }}" target="_blank">
+                <div class="uploadifyIcon"
+                     style="background: url({{ upload | kfi_upload('fixedthumbpath', 66, 66) }}) white no-repeat center center"></div>
+            </a>
+
+            <div class="cancel">
+                <a href="javascript:$('#{{ name }}_uploader').uploadify('cancel', '{{ name }}_uploader_{{ id }}');">X</a>
+            </div>
+
+            <span class="fileName">{{ upload.title }}</span><span class="data"></span>
+            {% if add_to_editor %}
+                <a style="margin-top: 10px;" data-id="{{ id }}" class="btn btn-primary kfiup_add_editor" href="#">
+                    <i class="icon-plus icon-white"></i>
+                    Aggiungi all'editor
+                </a>
+            {% endif %}
+            <div id="{{ name }}_hidden_{{ name }}_uploader_{{ id }}">
+                <input type="hidden"
+                       id="{{ name }}_id_{{ id }}"
+                       name="{{ full_name }}[{{ id }}][id]"
+                       value="{{ id }}">
+                <input type="hidden"
+                       id="{{ name }}_title_{{ id }}"
+                       name="{{ full_name }}[{{ id }}][title]"
+                       value="{{ upload.title }}">
+                <input type="hidden"
+                       id="{{ name }}_url_{{ id }}"
+                       name="{{ full_name }}[{{ id }}][url]"
+                       value="{{ upload.path }}">
+                <input type="hidden"
+                       id="{{ name }}_remote_{{ id }}"
+                       name="{{ full_name }}[{{ id }}][remote]" value="{{ upload.remote }}">
+                <input type="hidden"
+                       id="{{ name }}_type_{{ id }}"
+                       name="{{ full_name }}[{{ id }}][type]"
+                       value="{{ upload.type }}">
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div id="{{ name }}-status-message"></div>
