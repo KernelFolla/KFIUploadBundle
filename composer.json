@@ -12,6 +12,9 @@
     ],
     "require": {
         "symfony/framework-bundle": "2.*",
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "stof/doctrine-extensions-bundle": "dev-master",
+
     },
     "autoload": {
         "psr-0": { "KFI\\UploadBundle": "" }
