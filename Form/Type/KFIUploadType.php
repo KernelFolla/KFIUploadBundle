@@ -13,16 +13,21 @@ use KFI\UploadBundle\Form\DataTransformer;
 
 class KFIUploadType extends AbstractType
 {
+    const TYPE_IMAGE = 'image';
+    const TYPE_VIDEO = 'video';
+    const TYPE_ALL = 'all';
+
     private static $EXTENSIONS = array(
-        'image' => '*.jpg;*.gif;*.png',
-        'video' => '*.flv;*.wmv;*.avi;*.mpg',
-        'all'   => "*"
+        self::TYPE_IMAGE => '*.jpg;*.gif;*.png',
+        self::TYPE_VIDEO => '*.flv;*.wmv;*.avi;*.mpg',
+        self::TYPE_ALL   => "*"
     );
     private static $DESCRIPTIONS = array(
-        'image' => 'Image Files (.JPG, .GIF, .PNG)',
-        'video' => 'Video Files (.FLV, .WMV, .AVI, .MPG)',
-        'all'   => "*.*"
+        self::TYPE_IMAGE => 'Image Files (.JPG, .GIF, .PNG)',
+        self::TYPE_VIDEO => 'Video Files (.FLV, .WMV, .AVI, .MPG)',
+        self::TYPE_ALL   => "*.*"
     );
+
 
     protected $entityManager;
 
