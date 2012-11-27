@@ -41,19 +41,13 @@ class KFIUploadListener
             );
             $finalPath = $fullDestFolder . $filename;
             if (file_exists($tempPath)) {
-
-//                    foreach ($this->getThumbsByFile($temp_url) as $thumb) {
-//                        $temp_thumb  = dirname($temp_url) . "/" . $thumb;
-//                        $final_thumb = $base . $dest_folder . $thumb;
-//                        rename($temp_thumb, $final_thumb);
-//                    }
                 if (rename($tempPath, $finalPath)) {
                     $entity->setPath($destFolder . $filename);
                     $this->removeThumbnails($entity);
                 }
             } else {
-                throw new \Exception('ERROR - handleUploadedFile');
-                //return "ERROR - handleUploadedFile";
+                //usually when you try to refresh the page...
+                throw new \Exception('uploaded file don\'t exists');
             }
         }
     }

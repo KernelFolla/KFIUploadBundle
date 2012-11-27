@@ -2,7 +2,7 @@
 
 namespace KFI\UploadBundle\Services;
 
-use KFI\UploadBundle\Entity\EntityHasUploads;
+use KFI\UploadBundle\Entity\EntityUpload;
 
 class KFIUploadManager
 {
@@ -78,7 +78,7 @@ class KFIUploadManager
      * @return Renderer
      */
     public function getRenderer($upload){
-        if($upload instanceof EntityHasUploads)
+        if($upload instanceof EntityUpload)
             $upload = $upload->getUpload();
         return new Renderer($this, $upload);
     }

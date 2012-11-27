@@ -92,8 +92,8 @@ function form_type_kfi_upload(data) {
         }
     });
 
-    $('a.kfiup_add_editor').click(function(){
-        var url = $('#productHasImages_uploader_'+$(this).attr('data-id')).attr('href');
+    $('#' + fnSettings.name + '_uploader a.kfiup_add_editor').click(function(){
+        var url = $(this).parent().find('a.kfi-upload-link').attr('href');
         tinyMCE.execCommand(
             'mceInsertContent',
             false,
@@ -101,6 +101,7 @@ function form_type_kfi_upload(data) {
         );
         return false;
     });
+    
 }
 
 /**

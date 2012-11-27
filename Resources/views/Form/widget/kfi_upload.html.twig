@@ -11,7 +11,7 @@
 <div id="{{ name }}-queue" class="uploadifyQueue">
     {% for id, upload in value %}
         <div id="{{ name }}_uploader_{{ id }}" class="uploadify-queue-item">
-            <a id="kfi_upload-link-{{ id }}" href="{{ upload | kfi_upload('webpath') }}" target="_blank">
+            <a class="kfi-upload-link" id="kfi_upload-link-{{ id }}" href="{{ upload | kfi_upload('webpath') }}" target="_blank">
                 <div class="uploadifyIcon"
                      style="background: url({{ upload | kfi_upload('fixedthumbpath', 66, 66) }}) white no-repeat center center"></div>
             </a>
