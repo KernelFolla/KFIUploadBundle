@@ -83,11 +83,9 @@ abstract class EntityUpload
         $u->setParentClass(get_class($p));
         if(method_exists($p, 'getId'))
             $u->setParentId($p->getId());
-        else{
-            var_dump($p);
-            die();
-            throw new Exception('can\t get id');
-        }
+//        else{
+//            throw new Exception('can\t get id');
+//        }
     }
 
     /**
