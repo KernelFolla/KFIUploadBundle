@@ -15,12 +15,7 @@ class EntityHasUploadTransformer implements DataTransformerInterface
     /** @var ObjectRepository */
     private $repo;
 
-    public static function bind(FormBuilderInterface $builder, ObjectRepository $repo)
-    {
-        $builder->addViewTransformer(new self($repo));
-    }
-
-    private function __construct(ObjectRepository $repo)
+    public function __construct(ObjectRepository $repo)
     {
         $this->repo = $repo;
     }
