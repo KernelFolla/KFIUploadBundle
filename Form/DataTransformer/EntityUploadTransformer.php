@@ -7,10 +7,10 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
 
-use KFI\UploadBundle\Entity\EntityHasUploads;
+use KFI\UploadBundle\Entity\EntityUpload;
 use KFI\UploadBundle\Entity\Upload;
 
-class EntityHasUploadTransformer implements DataTransformerInterface
+class EntityUploadTransformer implements DataTransformerInterface
 {
     /** @var ObjectRepository */
     private $repo;
@@ -21,7 +21,7 @@ class EntityHasUploadTransformer implements DataTransformerInterface
     }
 
     /**
-     * transform array of objects in an array of ids
+     * transform array of objects in an array of id
      *
      * @param  object[] $collection
      * @return int[]
@@ -32,7 +32,7 @@ class EntityHasUploadTransformer implements DataTransformerInterface
         if (!$collection) {
             return $ret;
         }
-        /** @var $item EntityHasUploads */
+        /** @var $item EntityUpload */
         foreach ($collection as $item) {
             $ret[$item->getId()] = $item->getUpload();
         }
@@ -68,7 +68,7 @@ class EntityHasUploadTransformer implements DataTransformerInterface
 
     protected function bindEntityByID($id, $title)
     {
-        /** @var $entity EntityHasUploads */
+        /** @var $entity EntityUpload */
         $entity = $this->repo->find($id);
         if (!isset($entity)) {
             throw new TransformationFailedException(sprintf(
@@ -83,7 +83,7 @@ class EntityHasUploadTransformer implements DataTransformerInterface
 
     /**
      * @param array $item
-     * @return EntityHasUploads
+     * @return EntityUpload
      */
     protected function bindNewEntity($item)
     {
@@ -93,7 +93,7 @@ class EntityHasUploadTransformer implements DataTransformerInterface
         $upload->setRemote($item['remote']);
 
         $className = $this->repo->getClassName();
-        /** @var $ret EntityHasUploads */
+        /** @var $ret EntityUpload */
         $ret = new $className();
         $ret->setUpload($upload);
 

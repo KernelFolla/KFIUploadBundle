@@ -65,7 +65,7 @@ class KFIUploadType extends AbstractType
         );
         $isMulti = ($builder->getOption('mode') == 'multi');
         $transformer =  $isMulti ?
-            new DataTransformer\EntityHasUploadTransformer($repo)
+            new DataTransformer\EntityUploadTransformer($repo)
             : new DataTransformer\SingleUploadTransformer($repo);
         $builder->addViewTransformer($transformer);
     }

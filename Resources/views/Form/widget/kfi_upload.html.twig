@@ -47,7 +47,7 @@
             </div>
 
             <span class="fileName">{{ upload.title }}</span><span class="data"></span>
-            {% if add_to_editor %}
+            {% if add_to_editor %}var
                 <a style="margin-top: 10px;" data-id="{{ id }}" class="btn btn-primary kfiup_add_editor" href="#">
                     <i class="icon-plus icon-white"></i>
                     Aggiungi all'editor
@@ -57,7 +57,7 @@
                 <input type="hidden"
                        id="{{ name }}_id_{{ id }}"
                        name="{{ full_name }}[{{ id }}][id]"
-                       value="{{ id }}">
+                       value="{{ upload.id }}">
                 <input type="hidden"
                        id="{{ name }}_title_{{ id }}"
                        name="{{ full_name }}[{{ id }}][title]"

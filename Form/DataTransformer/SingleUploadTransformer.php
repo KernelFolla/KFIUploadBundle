@@ -23,19 +23,25 @@ class SingleUploadTransformer implements DataTransformerInterface
      * create a fake array with one item
      *
      * @param mixed $item
+     *
      * @return array|mixed
      */
     public function transform($item)
     {
-        return (!$item) ?
-            array()
-            : array($item);
+        if (!$item) {
+            return array();
+        } elseif ($item instanceof Upload) {
+            return array($item->getId() => $item);
+        } else {
+            throw new Exception('bad entity passed to ' . __CLASS__);
+        }
     }
 
     /**
-     * transform an array of id in array of object
+     * transform an array of id/title in array of object
      *
      * @param mixed $items
+     *
      * @return Upload
      * @throws TransformationFailedException
      */
@@ -44,7 +50,8 @@ class SingleUploadTransformer implements DataTransformerInterface
         if (!$items) {
             return null;
         }
-        $item   = array_pop($items);
+        $item = array_pop($items);
+
         $ret = isset($item['id']) ?
             $this->bindEntityByID($item['id'], $item['title'])
             : $this->bindNewEntity($item);
@@ -55,6 +62,7 @@ class SingleUploadTransformer implements DataTransformerInterface
 
     /**
      * @param $id
+     *
      * @return Upload
      * @throws TransformationFailedException
      */
@@ -73,6 +81,7 @@ class SingleUploadTransformer implements DataTransformerInterface
 
     /**
      * @param array $item
+     *
      * @return Upload
      */
     protected function bindNewEntity($item)
